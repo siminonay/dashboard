@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+  <link th:href="@{/styles/bootstrap.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/styles/fontawesome/css/all.css}" rel="stylesheet" type="text/css">
+  <script th:src="@{/styles/bootstrap.js}"></script>
+  <script th:src="@{/styles/chart.js}"></script>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+    .rightPanelTitle {
+      margin-top: 44px;
+    }
+    .table-striped > tbody > tr:nth-of-type(odd) {
+      --bs-table-accent-bg: #0d6efd1a !important;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-seven-tab" data-bs-toggle="pill"
+                  data-bs-target="#pills-seven" type="button" role="tab" aria-controls="pills-seven"
+                  aria-selected="true">Last 7 Days
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-thirty-tab" data-bs-toggle="pill" data-bs-target="#pills-thirty"
+                  type="button" role="tab" aria-controls="pills-thirty" aria-selected="false">Last 30 Days
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane active" id="pills-seven" role="tabpanel" aria-labelledby="pills-seven-tab">
+          <canvas id="chart1" width="200" height="200"></canvas>
+          <script th:inline="javascript">
+            var ctx = document.getElementById("chart1").getContext('2d');
+            var chart1 = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: [[${chartDateLast7Days}]],
+                datasets: [{
+                  label: "Number of hits: Last 7 days",
+                  borderColor: 'rgb(13, 110, 253)',
+                  lineTension: 0,
+                  fill: false,
+                  data: [[${chartDateLast7DaysData}]],
+                },]
+              },
+              options: {
+                responsive: true,
+              }
+            });
+          </script>
+        </div>
+        <div class="tab-pane fade" id="pills-thirty" role="tabpanel" aria-labelledby="pills-thirty-tab">
+          <canvas id="chart" width="200" height="200"></canvas>
+          <script th:inline="javascript">
+            var ctx = document.getElementById("chart").getContext('2d');
+            var chart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: [[${chartDateLast30Days}]],
+                datasets: [{
+                  label: "Number of hits: Last 30 days",
+                  borderColor: 'rgb(13, 110, 253)',
+                  lineTension: 0,
+                  fill: false,
+                  data: [[${chartDateLast30DaysData}]],
+                },]
+              },
+              options: {
+                responsive: true,
+              }
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <form class="example" action="action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+      <h5 class="rightPanelTitle">Historical Click Count</h5>
+      <p5 th:text="${createdtime}"></p5>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th th:text="Period">Period</th>
+          <th th:text="Hits">Hits</th>
+          <th th:text="PerDay">PerDay</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Last 7 days</td>
+          <td th:text="${last7days}"></td>
+          <td th:text="${last7daysPeriod}"></td>
+        </tr>
+        <tr>
+          <td>Last 30 days</td>
+          <td th:text="${last30days}"></td>
+          <td th:text="${last30daysPeriod}"></td>
+        </tr>
+        <tr>
+          <td>All time</td>
+          <td th:text="${alltimedays}"></td>
+          <td th:text="${alltimedaysPeriod}"></td>
+        </tr>
+        </tbody>
+      </table>
+      <h5>Best Day</h5>
+      <p5 th:text="${bestdayCount}" style="font-weight: bold;"></p5>
+      <p5 th:text="${bestday}"></p5>
+    </div>
+  </div>
+</div>
+</body>
+</html>
