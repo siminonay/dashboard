@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class BestDay {
-
     private String date;
     private Long clickCount;
 

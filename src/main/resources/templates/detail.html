@@ -47,13 +47,13 @@
                         var chart1 = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: [[${TinyDashboard.last7Days.dates}]],
+                                labels: [[${URLDashboard.last7Days.dates}]],
                                 datasets: [{
                                     label: "Number of hits: Last 7 days",
                                     borderColor: 'rgb(13, 110, 253)',
                                     lineTension: 0,
                                     fill: false,
-                                    data: [[${TinyDashboard.last7Days.numberOfAccess}]],
+                                    data: [[${URLDashboard.last7Days.numberOfAccess}]],
                                 },]
                             },
                             options: {
@@ -69,13 +69,13 @@
                         var chart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: [[${TinyDashboard.last30Days.dates}]],
+                                labels: [[${URLDashboard.last30Days.dates}]],
                                 datasets: [{
                                     label: "Number of hits: Last 30 days",
                                     borderColor: 'rgb(13, 110, 253)',
                                     lineTension: 0,
                                     fill: false,
-                                    data: [[${TinyDashboard.last30Days.numberOfAccess}]],
+                                    data: [[${URLDashboard.last30Days.numberOfAccess}]],
                                 },]
                             },
                             options: {
@@ -88,7 +88,7 @@
         </div>
         <div class="col-md-6">
             <h5 class="rightPanelTitle">Historical Click Count</h5>
-            <p5 th:text="'Short URL created on ' + ${TinyDashboard.createdTime}"></p5>
+            <p5 th:text="'URL created on ' + ${URLDashboard.createdTime}"></p5>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -100,24 +100,24 @@
                 <tbody>
                 <tr>
                     <td>Last 7 days</td>
-                    <td th:text="${TinyDashboard.last7Days.totalHits}"></td>
-                    <td th:text="${TinyDashboard.last7Days.totalHits}/7"></td>
+                    <td th:text="${URLDashboard.last7Days.totalHits}"></td>
+                    <td th:text="${URLDashboard.last7Days.totalHits}/7"></td>
                 </tr>
                 <tr>
                     <td>Last 30 days</td>
-                    <td th:text="${TinyDashboard.last30Days.totalHits}"></td>
-                    <td th:text="${TinyDashboard.last30Days.totalHits}/7"></td>
+                    <td th:text="${URLDashboard.last30Days.totalHits}"></td>
+                    <td th:text="${URLDashboard.last30Days.totalHits}/7"></td>
                 </tr>
                 <tr>
                     <td>All time</td>
-                    <td th:text="${TinyDashboard.allTime}"></td>
-                    <td th:text="${TinyDashboard.allTime}/30"></td>
+                    <td th:text="${URLDashboard.allTime}"></td>
+                    <td th:text="${URLDashboard.allTime}/30"></td>
                 </tr>
                 </tbody>
             </table>
             <h5>Best Day</h5>
-            <p5 th:text="${TinyDashboard.bestDay.clickCount} + ' hits on '"></p5>
-            <p5 th:text="${TinyDashboard.bestDay.date}"></p5>
+            <p5 th:text="${URLDashboard.bestDay.clickCount} + ' hits on '"></p5>
+            <p5 th:text="${URLDashboard.bestDay.date}"></p5>
         </div>
     </div>
 </div>
